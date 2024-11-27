@@ -330,3 +330,39 @@ end)
 
 
 runService.Heartbeat:Connect(updateRainbow)
+
+local workspace = game:GetService("Workspace")
+local runService = game:GetService("RunService")
+
+local rainbowColors = {
+    Color3.fromRGB(255, 0, 0),     -- Red
+    Color3.fromRGB(255, 165, 0),   -- Orange
+    Color3.fromRGB(255, 255, 0),   -- Yellow
+    Color3.fromRGB(0, 255, 0),     -- Green
+    Color3.fromRGB(0, 0, 255),     -- Blue
+    Color3.fromRGB(75, 0, 130),    -- Indigo (approximation)
+    Color3.fromRGB(148, 0, 211)    -- Violet
+}
+
+local currentIndex = 1
+local parts = {}
+
+--Efficiently collect all BaseParts once at the start
+for _, obj in pairs(workspace:GetDescendants()) do
+    if obj:IsA("BasePart") then
+        table.insert(parts, obj)
+        obj.Material = Enum.Material.Neon
+    end
+end
+
+local function updateRainbow()
+    currentIndex = currentIndex + 1
+    if currentIndex > #rainbowColors then
+        currentIndex = 1
+    end
+    for _, part in ipairs(parts) do
+        part.Color = rainbowColors[currentIndex]
+    end
+end
+
+runService.Heartbeat:Connect(updateRainbow)
