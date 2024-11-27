@@ -1,41 +1,3 @@
-local workspace = game:GetService("Workspace")
-local parts = {}  --A table to hold the parts we'll modify
-
---Pre-filter parts to improve performance
-for _, part in pairs(workspace:GetDescendants()) do
-    if part:IsA("BasePart") then
-        table.insert(parts, part)
-    end
-end
-
-
-local colorList = {
-    Color3.fromRGB(255, 0, 0),     -- Red
-    Color3.fromRGB(0, 255, 0),     -- Green
-    Color3.fromRGB(0, 0, 255),     -- Blue
-    Color3.fromRGB(255, 255, 0),   -- Yellow
-    Color3.fromRGB(255, 0, 255),   -- Magenta
-    Color3.fromRGB(0, 255, 255),   -- Cyan
-    Color3.fromRGB(255, 165, 0),   -- Orange
-    Color3.fromRGB(128, 0, 128),   -- Purple
-    Color3.fromRGB(255, 255, 255), -- White
-    Color3.fromRGB(0, 0, 0)       -- Black
-}
-
-local currentIndex = 1
-
-while true do
-    local newColor = colorList[currentIndex]
-    for _, part in pairs(parts) do
-        part.Color = newColor  --Directly setting the Color property
-    end
-    currentIndex = currentIndex + 1
-    if currentIndex > #colorList then
-        currentIndex = 1
-    end
-    wait(0.1)  -- Adjust the wait time to control the speed of the color change
-end
-
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local Camera = workspace.CurrentCamera
@@ -83,7 +45,7 @@ espBox.Filled = false
 espBox.Visible = false
 
 local espName = Drawing.new("Text")
-espName.Text = "HAWK TUAH"
+espName.Text = "pizdec.lua"
 espName.Size = Settings.TextSize
 espName.Center = true
 espName.Outline = true
@@ -157,3 +119,41 @@ ESPObjects[player] = nil
 end
 end)
 RunService.RenderStepped:Connect(updateESP)
+
+local workspace = game:GetService("Workspace")
+local parts = {}  --A table to hold the parts we'll modify
+
+--Pre-filter parts to improve performance
+for _, part in pairs(workspace:GetDescendants()) do
+    if part:IsA("BasePart") then
+        table.insert(parts, part)
+    end
+end
+
+
+local colorList = {
+    Color3.fromRGB(255, 0, 0),     -- Red
+    Color3.fromRGB(0, 255, 0),     -- Green
+    Color3.fromRGB(0, 0, 255),     -- Blue
+    Color3.fromRGB(255, 255, 0),   -- Yellow
+    Color3.fromRGB(255, 0, 255),   -- Magenta
+    Color3.fromRGB(0, 255, 255),   -- Cyan
+    Color3.fromRGB(255, 165, 0),   -- Orange
+    Color3.fromRGB(128, 0, 128),   -- Purple
+    Color3.fromRGB(255, 255, 255), -- White
+    Color3.fromRGB(0, 0, 0)       -- Black
+}
+
+local currentIndex = 1
+
+while true do
+    local newColor = colorList[currentIndex]
+    for _, part in pairs(parts) do
+        part.Color = newColor  --Directly setting the Color property
+    end
+    currentIndex = currentIndex + 1
+    if currentIndex > #colorList then
+        currentIndex = 1
+    end
+    wait(0.1)  -- Adjust the wait time to control the speed of the color change
+end
